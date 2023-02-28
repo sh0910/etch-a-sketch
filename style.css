@@ -15,7 +15,7 @@ h1 {
 	margin: 20px;
 }
 
-.container--sketch {
+.sketch {
 	margin: 0 auto;
 	background-color: #9dc08b;
 	border: 1px solid #40513b;
@@ -28,9 +28,24 @@ h1 {
 	gap: 0px;
 }
 
+.btns {
+	margin: 0 auto;
+	width: 960px;
+
+	position: relative;
+}
+
 .btn {
 	padding: 5px 15px;
 	margin: 10px;
+}
+
+.btn--reset {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	color: #edf1d6;
+	background-color: #40513b;
 }
 
 .sq {
@@ -43,7 +58,7 @@ h1 {
 	background-color: none;
 }
 
-.btn:hover,
-.btn:active {
+.btn:hover:enabled,
+.btn:active:enabled {
 	background-color: #e7b10a;
 }

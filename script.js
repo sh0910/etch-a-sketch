@@ -1,6 +1,6 @@
 'use strict';
 
-const sketchContainer = document.querySelector('.container--sketch');
+const sketchContainer = document.querySelector('.sketch');
 const btn16 = document.querySelector('.btn--16');
 const btn32 = document.querySelector('.btn--32');
 const btn64 = document.querySelector('.btn--64');
@@ -19,93 +19,77 @@ const renderSquares = function (num) {
 
 let squares;
 
-// todo: work on this
-function disableGridSizeBtns() {
-	const questionContainer = document.querySelector('.container--question');
+function disableGridSizeBtns(tog) {
+	const btnsSizeContainer = document.querySelector('.btns--size');
 
-	for (const child of questionContainer.children) {
-		console.log((child.disabled = true));
+	for (const child of btnsSizeContainer.children) {
+		child.disabled = tog;
+		child.tagName;
 	}
 }
 
 btn16.addEventListener('click', function () {
-	disableGridSizeBtns();
-	sketchContainer.insertAdjacentHTML('beforeend', renderSquares(10));
+	disableGridSizeBtns(true);
+
+	sketchContainer.insertAdjacentHTML('beforeend', renderSquares(16));
 	squares = document.querySelectorAll('.sq');
 
-	squareColourRandomizer();
+	paintColours();
 });
 
 btn32.addEventListener('click', function () {
+	disableGridSizeBtns(true);
+
 	sketchContainer.insertAdjacentHTML('beforeend', renderSquares(32));
 	squares = document.querySelectorAll('.sq');
 
-	squareColourRandomizer();
+	paintColours();
 });
 
 btn64.addEventListener('click', function () {
-	sketchContainer.insertAdjacentHTML('beforeend', renderSquares(64));
-	squares = document.querySelectorAll('.sq');
+	disableGridSizeBtns(true);
 
-	squareColourRandomizer();
+	sketchContainer.insertAdjacentHTML('beforeend', renderSquares(64));
+
+	squares = document.querySelectorAll('.sq');
+	paintColours();
 });
 
 btnReset.addEventListener('click', function () {
+	disableGridSizeBtns(false);
 	// ? is there better way to reset grid?
 	sketchContainer.innerHTML = '';
 });
 
-const squareColourRandomizer = function () {
+const randomRGB = function () {
+	const randomNumber = () => Math.floor(Math.random() * 265);
+	return `rgb(${randomNumber()},${randomNumber()},${randomNumber()})`;
+};
+
+const paintColours = function () {
 	squares.forEach((square) => {
 		square.addEventListener('mouseover', function (e) {
-			const randomColor = `rgb(${randomNumber()},${randomNumber()},${randomNumber()})`;
-
-			// console.log(`User hovered over ${square.classList}`);
-			// const clickedSquare = document.querySelector(`.sq--${square.innerText}`);
-			// clickedSquare.style.backgroundColor = randomColor;
-			e.target.style.backgroundColor = randomColor;
+			e.target.style.backgroundColor = randomRGB();
 		});
 	});
 };
 
-// For generating random color
-const randomNumber = function () {
-	return Math.floor(Math.random() * 265);
-};
-
 //todo: click and hover
 /* 
-
 let isMouseDown;
 
 document.addEventListener('mousedown', function () {
-  isMouseDown = true;
+	isMouseDown = true;
 });
 
 document.addEventListener('mouseup', function () {
-  isMouseDown = false;
+	isMouseDown = false;
 });
 
 function changeColour(e) {
-  if (isMouseDown) {
-    console.log(e.target);
+	if (isMouseDown) {
 	}
 }
+
 changeColour();
-
-*/
-
-// Event listener hovering over square
-/* 
-squares.forEach((square) => {
-	square.addEventListener('mouseover', function (e) {
-		const randomColor = `rgb(${randomNumber()},${randomNumber()},${randomNumber()})`;
-
-		// console.log(`User hovered over ${square.classList}`);
-		// const clickedSquare = document.querySelector(`.sq--${square.innerText}`);
-		// clickedSquare.style.backgroundColor = randomColor;
-		e.target.style.backgroundColor = randomColor;
-	});
-});
  */
-////////////
